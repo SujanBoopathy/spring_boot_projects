@@ -49,14 +49,15 @@ export class AppComponent implements OnInit{
     }
 
     public onAddEmployee(addForm : NgForm) : void {
+      document.getElementById("add-employee-form")?.click();
       this.employeeService.addEmployee(addForm.value).subscribe(
-        (response : Employee) => {
-          console.log(response);
-          this.getEmployees();
-        }        
-        ,
-        (error : HttpErrorResponse) => {
-          alert(error.message);
-        });
+        {
+          next: (employee : Employee) => {
+            console.log(employee);
+            this.getEmployees();
+          },
+          error: (e) => alert(e.message)
+        }
+      )
     }
 }
