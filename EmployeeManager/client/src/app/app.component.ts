@@ -60,4 +60,17 @@ export class AppComponent implements OnInit{
         }
       )
     }
+
+    public onUpdateEmployee(employee : Employee) : void {
+      this.employeeService.updateEmployee(employee).subscribe(
+        {
+          next: (employee : Employee) => {
+            console.log(employee);
+            this.getEmployees();
+          },
+          error: (e) => alert(e.message)
+        }
+      )
+      }
+  
 }
