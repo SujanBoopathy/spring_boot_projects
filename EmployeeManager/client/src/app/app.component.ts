@@ -13,12 +13,33 @@ export class AppComponent implements OnInit{
     public employees : Employee[] = [];
     public editEmployee? : Employee;
     public deleteEmployee? : Employee;
+    public searchText? : string;
 
     public constructor(private employeeService : EmployeeService){}
 
 
     ngOnInit(): void {
       this.getEmployees();
+    }
+
+    public searchEmployee(key : String) : void {
+      console.log(key)
+      const results : Employee[] = [];
+      for(const employee  of this.employees ){
+        if(
+             employee.name.toLowerCase().indexOf(key.toLowerCase()) !== -1
+          || employee.email.toLowerCase().indexOf(key.toLowerCase()) !== -1
+          || employee.phoneNumber.toLowerCase().indexOf(key.toLowerCase()) !== -1
+          || employee.jobTitle.toLowerCase().indexOf(key.toLowerCase()) !== -1        
+        ){
+            results.push(employee);
+        }       
+      }
+
+      this.employees = results;
+      if(results.length === 0 || !key){
+        this.getEmployees();
+      }
     }
 
 
