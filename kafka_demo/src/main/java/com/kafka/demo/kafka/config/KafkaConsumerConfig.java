@@ -20,4 +20,8 @@ public class KafkaConsumerConfig {
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         return props;
     }
+
+    public ConsumerFactory<String,String> consumerFactory(){
+        return new DefaultKafkaConsumerFactory<>(consumerConfig());
+    }
 }
