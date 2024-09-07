@@ -16,6 +16,7 @@ public class MessageController {
     }
     @PostMapping
     public void publish(@RequestBody MessageRequest request){
+        //send message to kafka
         kafkaTemplate.send("sujan",request.message());
     }
 }

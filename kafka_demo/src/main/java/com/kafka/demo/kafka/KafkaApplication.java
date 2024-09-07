@@ -15,6 +15,7 @@ public class KafkaApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(KafkaTemplate<String,String> kafkaTemplate){
 		return args -> {
+			// Initiate message process to kakfa
 			kafkaTemplate.send("sujanTopic","hello world by kafka");
 		};
 	}
